@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angualar JS</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
+
+    <style type="text/css">
+        .kid {
+            border:1px solid aquamarine;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div ng-app>
+    <div ng-controller="testCtrl">
+        <div ng-repeat="kid in kids" class="kid">
+            <p>{{kid.name}}</p>
+            <p>{{kid.age}}</p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function testCtrl($scope){
+        $scope.kids = [{name:'Manya', age:6}, {name:'Chaitanya', age:3}, {name:'Kavitha', age:23}]
+    }
+</script>
+</body>
+</html>
