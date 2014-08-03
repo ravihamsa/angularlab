@@ -2,8 +2,9 @@
 <html>
 <head>
     <title>Angualar JS</title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
-
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/d3.js"></script>
     <style type="text/css">
         .kid {
             border:1px solid aquamarine;
@@ -14,19 +15,19 @@
 
 
 
-<div ng-app>
-    <div ng-controller="testCtrl">
-        <div ng-repeat="kid in kids" class="kid">
-            <p>{{kid.name}}</p>
-            <p>{{kid.age}}</p>
-        </div>
-    </div>
+<div ng-app="testApp">
+    <family-names></family-names>
 </div>
 
-<script type="text/javascript">
-    function testCtrl($scope){
-        $scope.kids = [{name:'Manya', age:6}, {name:'Chaitanya', age:3}, {name:'Kavitha', age:23}]
-    }
-</script>
+
+<div ng-app="d3App">
+    <donut-chart></donut-chart>
+</div>
+
+
+<script type="text/javascript" src="js/testApp.js"></script>
+<script type="text/javascript" src="js/d3App.js"></script>
+
+
 </body>
 </html>
