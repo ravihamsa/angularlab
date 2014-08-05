@@ -13,20 +13,15 @@
 </head>
 <body>
 
-
-
-<div ng-app="testApp">
-    <family-names></family-names>
+<div ng-app="dynamicDonutApp" ng-init="chartData=[{value:80}, {value:30}, {value:50}]">
+    <button ng-click="chartData.push({value:50})">add slice</button>
+    <button ng-click="chartData.pop()">remove slice</button>
+    <input type="range" ng-repeat="data in chartData" ng-model="data.value">
+    <donut-chart data="chartData"></donut-chart>
 </div>
 
 
-<div ng-app="d3App">
-    <donut-chart></donut-chart>
-</div>
-
-
-<script type="text/javascript" src="js/testApp.js"></script>
-<script type="text/javascript" src="js/d3App.js"></script>
+<script type="text/javascript" src="js/dynamicDonutApp.js"></script>
 
 
 </body>

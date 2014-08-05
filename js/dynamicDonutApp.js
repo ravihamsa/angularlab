@@ -1,5 +1,7 @@
-var app = angular.module('d3App', []);
+var  app = angular.module('dynamicDonutApp', []);
+
 app.directive('donutChart', function () {
+
     var linkFn = function ($scope, el, attributes) {
 
         var color = d3.scale.category10();
@@ -9,6 +11,7 @@ app.directive('donutChart', function () {
         var min = Math.min(width, height);
         var svg = d3.select(el[0]).append('svg');
         var pie = d3.layout.pie().sort(null);
+        pie.value(function(d){return d.value});
         var arc = d3.svg.arc()
             .outerRadius(min / 2 * 0.9)
             .innerRadius(min / 2 * 0.5);
@@ -18,13 +21,28 @@ app.directive('donutChart', function () {
 // center the donut chart
             .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
         // add the <path>s for each arc slice
-        g.selectAll('path').data(pie(data))
+        var arcs = g.selectAll('path').data(pie(data))
             .enter().append('path')
             .style('stroke', 'white')
             .attr('d', arc)
             .attr('fill', function (d, i) { return color(i) });
 
 
+
+
+        $scope.$watch('data', function(){
+            console.log(JSON.stringify(data));
+            arcs = arcs.data(pie(data))
+                .attr('d', arc)
+                .attr('fill', function (d, i) { return color(i) });
+
+            arcs.enter().append('path')
+                .style('stroke', 'white')
+                .attr('d', arc)
+                .attr('fill', function (d, i) { return color(i) });
+
+            arcs.exit().remove();
+        }, true);
     }
 
     return {
@@ -32,18 +50,5 @@ app.directive('donutChart', function () {
         link: linkFn,
         transclude:false,
         scope: { data: '=' }
-    }
-})
-
-app.directive('donutChartList', function(){
-    var linkFn = function($scope, el, attributes){
-        $scope.kids = [{name:'Manya', age:6, chartData:[8,3,7]}, {name:'Chaitanya', age:3, chartData:[2,5,9]}, {name:'Kavitha', age:23, chartData:[6,2,3]}]
-        console.log(arguments);
-    }
-
-    return {
-        restrict:'E',
-        link:linkFn,
-        templateUrl: 'templates/kids.html'
     }
 })
