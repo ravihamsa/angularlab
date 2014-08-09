@@ -9,19 +9,22 @@
         .kid {
             border:1px solid aquamarine;
         }
+
+        .link {
+            stroke-width:3;
+            stroke:red;
+            fill:none;
+        }
     </style>
 </head>
 <body>
 
-<div ng-app="dynamicDonutApp" ng-init="chartData=[{value:80}, {value:30}, {value:50}]">
-    <button ng-click="chartData.push({value:50})">add slice</button>
-    <button ng-click="chartData.pop()">remove slice</button>
-    <input type="range" ng-repeat="data in chartData" ng-model="data.value">
-    <donut-chart data="chartData"></donut-chart>
+<div ng-app="treeApp">
+   <work-stream ng-init="treeData={'name':'workStream1','type':'workStream','children':[{'name':'phase1','type':'phase','children':[{'name':'activity1','type':'activity'}]},{'name':'phase2','type':'phase','children':[{'name':'activity1','type':'activity'}]},{'name':'phase3','type':'phase','children':[{'name':'activity1','type':'activity'}]},{'name':'phase4','type':'phase','children':[{'name':'activity1','type':'activity'}]},{'name':'phase5','type':'phase','children':[{'name':'activity1','type':'activity'},{'name':'activity2','type':'activity'}]}]}"></work-stream>
 </div>
 
 
-<script type="text/javascript" src="js/dynamicDonutApp.js"></script>
+<script type="text/javascript" src="js/treeApp.js"></script>
 
 
 </body>
